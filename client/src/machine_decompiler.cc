@@ -20,5 +20,18 @@
  * IN THE SOFTWARE.
  */
 
+#include "machine_decompiler.h"
 
+namespace machine_decompiler {
+namespace client {
 
+void MachineDecompiler::ShowWindow() {
+
+}
+
+void MachineDecompiler::LoadBinary(std::string &path) {
+
+}
+
+} // namespace client
+} // namespace machine_decompiler

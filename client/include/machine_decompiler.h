@@ -23,11 +23,15 @@
 #ifndef MACHINE_DECOMPILER_H_
 #define MACHINE_DECOMPILER_H_
 
+#include <string>
+
 namespace machine_decompiler {
 namespace client {
 
 class MachineDecompiler {
-
+ public:
+  void ShowWindow();
+  void LoadBinary(std::string& path) noexcept(false);
 };
 
 } // namespace client

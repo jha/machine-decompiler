@@ -22,11 +22,17 @@
 
 #include "machine_decompiler.h"
 
-int main(int argc, char** args) {
+int main(int argc, char const** args) {
   using namespace machine_decompiler::client;
-  MachineDecompiler decompiler();
+  MachineDecompiler decompiler;
+  decompiler.ShowWindow();
 
   if (argc > 1) {
+    try {
+      std::string path(args[1]);
+      decompiler.LoadBinary(path);
+    } catch (const std::exception&) {
+    }
     // Try to load the file path in args[1]
   }
   return 0;
