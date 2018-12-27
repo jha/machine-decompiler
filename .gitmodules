@@ -1,3 +1,6 @@
 [submodule "client/imgui"]
 	path = client/imgui
 	url = https://github.com/ocornut/imgui.git
+[submodule "client/gl3w"]
+	path = client/gl3w
+	url = https://github.com/skaslev/gl3w.git
