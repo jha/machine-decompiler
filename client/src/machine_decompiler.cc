@@ -26,7 +26,7 @@ namespace machine_decompiler {
 namespace client {
 
 void MachineDecompiler::ShowWindow() {
-
+  auto& platform = ultralight::Platform::instance();
 }
 
 void MachineDecompiler::LoadBinary(std::string &path) {

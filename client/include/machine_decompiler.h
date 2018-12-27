@@ -25,6 +25,9 @@
 
 #include <string>
 
+#include <Ultralight/Ultralight.h>
+#include <JavaScriptCore/JavaScript.h>
+
 namespace machine_decompiler {
 namespace client {
 
