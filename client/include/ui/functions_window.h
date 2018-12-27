@@ -20,30 +20,27 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef MACHINE_DECOMPILER_H_
-#define MACHINE_DECOMPILER_H_
+#ifndef MACHINE_DECOMPILER_UI_FUNCTIONS_WINDOW_H_
+#define MACHINE_DECOMPILER_UI_FUNCTIONS_WINDOW_H_
 
-#include <string>
-
-#include "ui/manager.h"
+#include "ui/window.h"
 
 namespace machine_decompiler {
 namespace client {
+namespace ui {
 
-class MachineDecompiler {
-  ui::Manager ui_manager_;
+class FunctionsWindow : public Window {
+ protected:
+  ~FunctionsWindow() override = default;
+
+  void Render() override;
 
  public:
-  MachineDecompiler();
-  void ShowWindow();
-  void LoadBinary(std::string& path) noexcept(false);
-
-  ui::Manager& ui_manager() {
-    return ui_manager_;
-  }
+  FunctionsWindow();
 };
 
+} // namespace ui
 } // namespace client
 } // namespace machine_decompiler
 
-#endif // MACHINE_DECOMPILER_H_
+#endif // MACHINE_DECOMPILER_UI_FUNCTIONS_WINDOW_H_

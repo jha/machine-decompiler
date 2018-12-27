@@ -38,7 +38,13 @@ void glfw_error_callback(int error, char const* description) {
   fprintf(stderr, "Glfw Error %d: %s\n", error, description);
 }
 
+ImVec4 const clearColor = ImVec4(.2f, .2f, .2f, 1.f);
+
 } // namespace
+
+MachineDecompiler::MachineDecompiler()
+    : ui_manager_() {
+}
 
 void MachineDecompiler::ShowWindow() {
   glfwSetErrorCallback(glfw_error_callback);
@@ -59,7 +65,7 @@ void MachineDecompiler::ShowWindow() {
   auto const* glsl_version = "#version 130";
 #endif // __APPLE__
 
-  auto* window = glfwCreateWindow(1920, 1080, "Dear ImGui GLFW+OpenGL3",
+  auto* window = glfwCreateWindow(640, 480, "Machine Decompiler",
       nullptr, nullptr);
   glfwMakeContextCurrent(window);
   glfwSwapInterval(1);
@@ -86,16 +92,14 @@ void MachineDecompiler::ShowWindow() {
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 
-    ImGui::Begin("Hello, world!");
-    ImGui::Text("This is some useful text.");
-    ImGui::End();
+    ui_manager().Show();
 
     ImGui::Render();
     glfwMakeContextCurrent(window);
     int dw, dh;
     glfwGetFramebufferSize(window, &dw, &dh);
     glViewport(0, 0, dw, dh);
-    glClearColor(0, 0, 0, 0);
+    glClearColor(clearColor.x, clearColor.y, clearColor.z, clearColor.w);
     glClear(GL_COLOR_BUFFER_BIT);
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 

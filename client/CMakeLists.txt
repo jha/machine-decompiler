@@ -8,6 +8,9 @@ set(CMAKE_CXX_STANDARD 14)
 set(SOURCES
     src/main.cc
     src/machine_decompiler.cc
+    src/ui/manager.cc
+    src/ui/window.cc
+    src/ui/functions_window.cc
     )
 
 # Generic dear imgui sources required for bindings-independent GUIs
