@@ -20,13 +20,17 @@
  * IN THE SOFTWARE.
  */
 
+#include <imgui.h>
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
+
 #include "machine_decompiler.h"
 
 namespace machine_decompiler {
 namespace client {
 
 void MachineDecompiler::ShowWindow() {
-
+  
 }
 
 void MachineDecompiler::LoadBinary(std::string &path) {
