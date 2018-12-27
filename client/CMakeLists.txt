@@ -32,14 +32,16 @@ target_include_directories(imgui-bindings PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/imgui/examples/libs/gl3w
     )
 find_library(GLFW3_LIB
-    NAMES glfw3
-    PATHS "${CMAKE_CURRENT_SOURCE_DIR}/imgui/examples/libs/glfw/lib-vc2010-64"
+    NAMES glfw3_2018
+    PATHS "${CMAKE_CURRENT_SOURCE_DIR}"
     PATH_SUFFIXES lib
     NO_DEFAULT_PATH
     )
-target_link_libraries(imgui-bindings
-    ${GLFW3_LIB}
+find_library(OPENGL_LIB
+    NAMES Opengl32
+    PATH_SUFFIXES lib
     )
+target_link_libraries(imgui-bindings ${OPENGL_LIB} ${GLFW3_LIB})
 
 add_executable(md-client ${SOURCES})
 target_link_libraries(md-client
