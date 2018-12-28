@@ -20,23 +20,47 @@
  * IN THE SOFTWARE.
  */
 
+#include <stdio.h>
+
 #include <imgui.h>
 
 #include "ui/window.h"
+#include "ui/manager.h"
 
 namespace machine_decompiler {
 namespace client {
 namespace ui {
 
-Window::Window(std::string const& title)
-    : title_(title),
-      open_(true) {
+namespace {
+
+std::string fmtptr(void const* ptr) {
+  char buff[64] = {0};
+  sprintf(buff, "%04X", reinterpret_cast<uintptr_t>(ptr));
+  return std::string(buff);
+}
+
+} // namespace
+
+Window::Window(Manager& manager,
+    std::string const& title, ImVec2 const& defSize)
+    : manager_(manager),
+      title_(title + "##" + fmtptr(this)),
+      default_size_(defSize),
+      open_(true),
+      new_window_(true) {
 }
 
 void Window::Show() {
-  ImGui::Begin(title().c_str(), &open_);
-  Render();
-  ImGui::End();
+  if (open()) {
+    ImGui::SetNextWindowSizeConstraints(ImVec2(128, 64), ImVec2(10000, 10000));
+    if (new_window())
+      ImGui::SetNextWindowSize(default_size());
+    if (ImGui::Begin(title().c_str(), &open_))
+      Render();
+    ImGui::End();
+  } else {
+    manager().Remove(this);
+  }
 }
 
 } // namespace ui

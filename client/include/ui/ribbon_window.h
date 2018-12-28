@@ -20,45 +20,29 @@
  * IN THE SOFTWARE.
  */
 
-#include "ui/ribbon_window.h"
-#include "ui/functions_window.h"
+#ifndef MACHINE_DECOMPILER_UI_RIBBON_WINDOW_H_
+#define MACHINE_DECOMPILER_UI_RIBBON_WINDOW_H_
 
-#include "ui/manager.h"
+#include "ui/window.h"
 
 namespace machine_decompiler {
 namespace client {
 namespace ui {
 
-Manager::Manager()
-    : windows_(),
-      add_queue_() {
-  windows_.push_back(new RibbonWindow(*this));
-}
+class RibbonWindow : public Window {
+ protected:
+  ~RibbonWindow() override = default;
 
-void Manager::Add(Window* window) {
-  add_queue_.push_back(window);
-}
+  void Render() override;
 
-bool Manager::Remove(Window* window) {
-  auto it = std::find(windows_.begin(), windows_.end(), window);
-  if (it != windows_.end()) {
-    delete (*it);
-    windows_.erase(it);
-    return true;
-  }
-  return false;
-}
+ public:
+  RibbonWindow(Manager& manager);
 
-void Manager::Show() {
-  for (auto* it : windows_) {
-    it->Show();
-  }
-  for (auto* it : add_queue_) {
-    windows_.push_back(it);
-  }
-  add_queue_.clear();
-}
+  void Show() override;
+};
 
 } // namespace ui
 } // namespace client
 } // namespace machine_decompiler
+
+#endif // MACHINE_DECOMPILER_UI_RIBBON_WINDOW_H_

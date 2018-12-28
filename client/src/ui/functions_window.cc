@@ -28,12 +28,16 @@ namespace machine_decompiler {
 namespace client {
 namespace ui {
 
-FunctionsWindow::FunctionsWindow()
-    : Window("Functions") {
+FunctionsWindow::FunctionsWindow(Manager& manager)
+    : Window(manager, "Functions") {
 }
 
 void FunctionsWindow::Render() {
-  ImGui::Text("Hello, world");
+  ImGui::BeginChild((title() + "_fn_list").c_str());
+  for (auto i = 0u; i < 100; ++i) {
+    ImGui::Text("sub_%02X", i + 0x1000);
+  }
+  ImGui::EndChild();
 }
 
 } // namespace ui

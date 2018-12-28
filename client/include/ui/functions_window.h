@@ -31,12 +31,11 @@ namespace ui {
 
 class FunctionsWindow : public Window {
  protected:
-  ~FunctionsWindow() override = default;
-
   void Render() override;
 
  public:
-  FunctionsWindow();
+  FunctionsWindow(Manager& manager);
+  ~FunctionsWindow() override = default;
 };
 
 } // namespace ui

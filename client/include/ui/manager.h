@@ -33,9 +33,13 @@ namespace ui {
 
 class Manager {
   std::vector<Window*> windows_;
+  std::vector<Window*> add_queue_;
 
  public:
   Manager();
+
+  void Add(Window* window);
+  bool Remove(Window* window);
   void Show();
 };
 

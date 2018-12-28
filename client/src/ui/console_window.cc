@@ -20,43 +20,27 @@
  * IN THE SOFTWARE.
  */
 
-#include "ui/ribbon_window.h"
-#include "ui/functions_window.h"
+#include <imgui.h>
 
+#include "ui/console_window.h"
 #include "ui/manager.h"
 
 namespace machine_decompiler {
 namespace client {
 namespace ui {
 
-Manager::Manager()
-    : windows_(),
-      add_queue_() {
-  windows_.push_back(new RibbonWindow(*this));
+namespace {
+
+ImVec2 const defWinSize(512, 128);
+
+} // namespace
+
+ConsoleWindow::ConsoleWindow(Manager &manager)
+    : Window(manager, "Console", defWinSize) {
 }
 
-void Manager::Add(Window* window) {
-  add_queue_.push_back(window);
-}
+void ConsoleWindow::Render() {
 
-bool Manager::Remove(Window* window) {
-  auto it = std::find(windows_.begin(), windows_.end(), window);
-  if (it != windows_.end()) {
-    delete (*it);
-    windows_.erase(it);
-    return true;
-  }
-  return false;
-}
-
-void Manager::Show() {
-  for (auto* it : windows_) {
-    it->Show();
-  }
-  for (auto* it : add_queue_) {
-    windows_.push_back(it);
-  }
-  add_queue_.clear();
 }
 
 } // namespace ui

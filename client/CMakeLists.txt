@@ -10,7 +10,12 @@ set(SOURCES
     src/machine_decompiler.cc
     src/ui/manager.cc
     src/ui/window.cc
+    src/ui/ribbon_window.cc
     src/ui/functions_window.cc
+    src/ui/strings_window.cc
+    src/ui/disasm_window.cc
+    src/ui/hexdump_window.cc
+    src/ui/console_window.cc
     )
 
 # Generic dear imgui sources required for bindings-independent GUIs
