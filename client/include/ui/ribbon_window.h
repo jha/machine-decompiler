@@ -20,38 +20,29 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef MACHINE_DECOMPILER_UI_WINDOW_H_
-#define MACHINE_DECOMPILER_UI_WINDOW_H_
+#ifndef MACHINE_DECOMPILER_UI_RIBBON_WINDOW_H_
+#define MACHINE_DECOMPILER_UI_RIBBON_WINDOW_H_
 
-#include <string>
+#include "ui/window.h"
 
 namespace machine_decompiler {
 namespace client {
 namespace ui {
 
-class Window {
-  std::string title_;
-  bool open_;
-
+class RibbonWindow : public Window {
  protected:
-  explicit Window(std::string const& title);
-  virtual ~Window() = default;
-  virtual void Render() = 0;
+  ~RibbonWindow() override = default;
+
+  void Render() override;
 
  public:
-  virtual void Show();
+  RibbonWindow();
 
-  std::string const& title() const {
-    return title_;
-  }
-
-  bool open() const {
-    return open_;
-  }
+  void Show() override;
 };
 
 } // namespace ui
 } // namespace client
 } // namespace machine_decompiler
 
-#endif // MACHINE_DECOMPILER_UI_WINDOW_H_
+#endif // MACHINE_DECOMPILER_UI_RIBBON_WINDOW_H_

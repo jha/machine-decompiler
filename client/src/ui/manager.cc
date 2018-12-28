@@ -20,6 +20,7 @@
  * IN THE SOFTWARE.
  */
 
+#include "ui/ribbon_window.h"
 #include "ui/functions_window.h"
 
 #include "ui/manager.h"
@@ -30,6 +31,7 @@ namespace ui {
 
 Manager::Manager()
     : windows_() {
+  windows_.push_back(new RibbonWindow());
   windows_.push_back(new FunctionsWindow());
 }
 

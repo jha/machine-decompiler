@@ -20,38 +20,60 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef MACHINE_DECOMPILER_UI_WINDOW_H_
-#define MACHINE_DECOMPILER_UI_WINDOW_H_
+#include <imgui.h>
 
-#include <string>
+#include "ui/ribbon_window.h"
 
 namespace machine_decompiler {
 namespace client {
 namespace ui {
 
-class Window {
-  std::string title_;
-  bool open_;
+RibbonWindow::RibbonWindow()
+    : Window("") {
+}
 
- protected:
-  explicit Window(std::string const& title);
-  virtual ~Window() = default;
-  virtual void Render() = 0;
+void RibbonWindow::Render() {
+  // File
+  if (ImGui::BeginMenu("File")) {
+    if (ImGui::MenuItem("Open", "Ctrl+O")) {
 
- public:
-  virtual void Show();
+    }
+    if (ImGui::MenuItem("Save", "Ctrl+S")) {
 
-  std::string const& title() const {
-    return title_;
+    }
+    if (ImGui::MenuItem("Close", "Ctrl+W")) {
+
+    }
+    ImGui::EndMenu();
   }
 
-  bool open() const {
-    return open_;
+  // Settings
+  if (ImGui::BeginMenu("Settings")) {
+    if (ImGui::MenuItem("UI Fonts")) {
+
+    }
+    if (ImGui::MenuItem("Editor Fonts")) {
+
+    }
+    ImGui::EndMenu();
   }
-};
+
+  // Help
+  if (ImGui::BeginMenu("Help")) {
+    if (ImGui::MenuItem("About")) {
+
+    }
+    ImGui::EndMenu();
+  }
+}
+
+void RibbonWindow::Show() {
+  if (ImGui::BeginMainMenuBar()) {
+    Render();
+    ImGui::EndMainMenuBar();
+  }
+}
 
 } // namespace ui
 } // namespace client
 } // namespace machine_decompiler
-
-#endif // MACHINE_DECOMPILER_UI_WINDOW_H_

@@ -10,6 +10,7 @@ set(SOURCES
     src/machine_decompiler.cc
     src/ui/manager.cc
     src/ui/window.cc
+    src/ui/ribbon_window.cc
     src/ui/functions_window.cc
     )
 
