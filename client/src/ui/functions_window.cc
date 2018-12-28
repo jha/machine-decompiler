@@ -33,7 +33,11 @@ FunctionsWindow::FunctionsWindow()
 }
 
 void FunctionsWindow::Render() {
-  ImGui::Text("Hello, world");
+  ImGui::BeginChild("FunctionsWindow_fn_list");
+  for (auto i = 0u; i < 100; ++i) {
+    ImGui::Text("sub_%02X", i + 0x1000);
+  }
+  ImGui::EndChild();
 }
 
 } // namespace ui
