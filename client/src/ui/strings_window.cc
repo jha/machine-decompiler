@@ -20,6 +20,8 @@
  * IN THE SOFTWARE.
  */
 
+#include <imgui.h>
+
 #include "ui/strings_window.h"
 #include "ui/manager.h"
 
