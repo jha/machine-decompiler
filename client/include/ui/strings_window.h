@@ -20,8 +20,8 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef MACHINE_DECOMPILER_UI_FUNCTIONS_WINDOW_H_
-#define MACHINE_DECOMPILER_UI_FUNCTIONS_WINDOW_H_
+#ifndef MACHINE_DECOMPILER_UI_STRINGS_WINDOW_H_
+#define MACHINE_DECOMPILER_UI_STRINGS_WINDOW_H_
 
 #include "ui/window.h"
 
@@ -29,17 +29,19 @@ namespace machine_decompiler {
 namespace client {
 namespace ui {
 
-class FunctionsWindow : public Window {
+class Manager;
+
+class StringsWindow : public Window {
  protected:
   void Render() override;
 
  public:
-  FunctionsWindow(Manager& manager);
-  ~FunctionsWindow() override = default;
+  explicit StringsWindow(Manager& manager);
+  ~StringsWindow() override = default;
 };
 
 } // namespace ui
 } // namespace client
 } // namespace machine_decompiler
 
-#endif // MACHINE_DECOMPILER_UI_FUNCTIONS_WINDOW_H_
+#endif // MACHINE_DECOMPILER_UI_STRINGS_WINDOW_H_

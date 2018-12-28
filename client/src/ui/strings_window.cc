@@ -20,26 +20,27 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef MACHINE_DECOMPILER_UI_FUNCTIONS_WINDOW_H_
-#define MACHINE_DECOMPILER_UI_FUNCTIONS_WINDOW_H_
-
-#include "ui/window.h"
+#include "ui/strings_window.h"
+#include "ui/manager.h"
 
 namespace machine_decompiler {
 namespace client {
 namespace ui {
 
-class FunctionsWindow : public Window {
- protected:
-  void Render() override;
+namespace {
 
- public:
-  FunctionsWindow(Manager& manager);
-  ~FunctionsWindow() override = default;
-};
+ImVec2 const defWinSize(256, 384);
+
+} // namespace
+
+StringsWindow::StringsWindow(Manager &manager)
+    : Window(manager, "Strings", defWinSize) {
+}
+
+void StringsWindow::Render() {
+
+}
 
 } // namespace ui
 } // namespace client
 } // namespace machine_decompiler
-
-#endif // MACHINE_DECOMPILER_UI_FUNCTIONS_WINDOW_H_

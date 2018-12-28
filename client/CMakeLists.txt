@@ -12,6 +12,7 @@ set(SOURCES
     src/ui/window.cc
     src/ui/ribbon_window.cc
     src/ui/functions_window.cc
+    src/ui/strings_window.cc
     )
 
 # Generic dear imgui sources required for bindings-independent GUIs

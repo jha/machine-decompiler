@@ -25,6 +25,7 @@
 #include "ui/ribbon_window.h"
 #include "ui/manager.h"
 #include "ui/functions_window.h"
+#include "ui/strings_window.h"
 
 namespace machine_decompiler {
 namespace client {
@@ -52,7 +53,7 @@ void RibbonWindow::Render() {
       manager().Add(new FunctionsWindow(manager()));
     }
     if (ImGui::MenuItem("Strings", "Ctrl+T")) {
-
+      manager().Add(new StringsWindow(manager()));
     }
     if (ImGui::MenuItem("Disassembly", "Ctrl+D")) {
 
