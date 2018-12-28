@@ -27,6 +27,7 @@
 #include "ui/functions_window.h"
 #include "ui/strings_window.h"
 #include "ui/disasm_window.h"
+#include "ui/hexdump_window.h"
 
 namespace machine_decompiler {
 namespace client {
@@ -60,7 +61,7 @@ void RibbonWindow::Render() {
       manager().Add(new DisasmWindow(manager()));
     }
     if (ImGui::MenuItem("Hexdump", "Ctrl+H")) {
-
+      manager().Add(new HexdumpWindow(manager()));
     }
     if (ImGui::MenuItem("Console", "Ctrl+K")) {
 
