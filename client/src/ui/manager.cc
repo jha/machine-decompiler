@@ -35,6 +35,16 @@ Manager::Manager()
   windows_.push_back(new FunctionsWindow(*this));
 }
 
+bool Manager::Remove(Window* window) {
+  auto it = std::find(windows_.begin(), windows_.end(), window);
+  if (it != windows_.end()) {
+    delete (*it);
+    windows_.erase(it);
+    return true;
+  }
+  return false;
+}
+
 void Manager::Show() {
   for (auto* it : windows_) {
     it->Show();

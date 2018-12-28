@@ -25,6 +25,7 @@
 #include <imgui.h>
 
 #include "ui/window.h"
+#include "ui/manager.h"
 
 namespace machine_decompiler {
 namespace client {
@@ -34,7 +35,7 @@ namespace {
 
 std::string fmtptr(void const* ptr) {
   char buff[64] = {0};
-  sprintf(buff, "%04X", ptr);
+  sprintf(buff, "%04X", reinterpret_cast<uintptr_t>(ptr));
   return std::string(buff);
 }
 
@@ -51,6 +52,8 @@ void Window::Show() {
     if (ImGui::Begin(title().c_str(), &open_))
       Render();
     ImGui::End();
+  } else {
+    manager().Remove(this);
   }
 }
 

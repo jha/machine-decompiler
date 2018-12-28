@@ -41,24 +41,24 @@ void RibbonWindow::Render() {
     if (ImGui::MenuItem("Save", "Ctrl+S")) {
 
     }
-    if (ImGui::MenuItem("Close", "Ctrl+W")) {
-
-    }
     ImGui::EndMenu();
   }
 
   // View
   if (ImGui::BeginMenu("View")) {
-    if (ImGui::MenuItem("Functions")) {
+    if (ImGui::MenuItem("Functions", "Ctrl+N")) {
 
     }
-    if (ImGui::MenuItem("Strings")) {
+    if (ImGui::MenuItem("Strings", "Ctrl+T")) {
 
     }
-    if (ImGui::MenuItem("Disassembly")) {
+    if (ImGui::MenuItem("Disassembly", "Ctrl+D")) {
 
     }
-    if (ImGui::MenuItem("Hexdump")) {
+    if (ImGui::MenuItem("Hexdump", "Ctrl+H")) {
+
+    }
+    if (ImGui::MenuItem("Console", "Ctrl+K")) {
 
     }
     ImGui::EndMenu();

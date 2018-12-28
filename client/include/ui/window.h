@@ -38,11 +38,11 @@ class Window {
 
  protected:
   explicit Window(Manager& manager, std::string const& title);
-  virtual ~Window() = default;
   virtual void Render() = 0;
 
  public:
   virtual void Show();
+  virtual ~Window() = default;
 
   Manager& manager() {
     return manager_;

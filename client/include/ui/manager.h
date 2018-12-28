@@ -36,6 +36,8 @@ class Manager {
 
  public:
   Manager();
+
+  bool Remove(Window* window);
   void Show();
 };
 
