@@ -30,9 +30,13 @@ namespace client {
 namespace ui {
 
 Manager::Manager()
-    : windows_() {
+    : windows_(),
+      add_queue_() {
   windows_.push_back(new RibbonWindow(*this));
-  windows_.push_back(new FunctionsWindow(*this));
+}
+
+void Manager::Add(Window* window) {
+  add_queue_.push_back(window);
 }
 
 bool Manager::Remove(Window* window) {
@@ -49,6 +53,10 @@ void Manager::Show() {
   for (auto* it : windows_) {
     it->Show();
   }
+  for (auto* it : add_queue_) {
+    windows_.push_back(it);
+  }
+  add_queue_.clear();
 }
 
 } // namespace ui

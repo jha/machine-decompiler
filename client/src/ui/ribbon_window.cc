@@ -23,6 +23,8 @@
 #include <imgui.h>
 
 #include "ui/ribbon_window.h"
+#include "ui/manager.h"
+#include "ui/functions_window.h"
 
 namespace machine_decompiler {
 namespace client {
@@ -47,7 +49,7 @@ void RibbonWindow::Render() {
   // View
   if (ImGui::BeginMenu("View")) {
     if (ImGui::MenuItem("Functions", "Ctrl+N")) {
-
+      manager().Add(new FunctionsWindow(manager()));
     }
     if (ImGui::MenuItem("Strings", "Ctrl+T")) {
 
