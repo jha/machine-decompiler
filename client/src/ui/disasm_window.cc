@@ -22,74 +22,21 @@
 
 #include <imgui.h>
 
-#include "ui/ribbon_window.h"
-#include "ui/manager.h"
-#include "ui/functions_window.h"
-#include "ui/strings_window.h"
 #include "ui/disasm_window.h"
+#include "ui/manager.h"
 
 namespace machine_decompiler {
 namespace client {
 namespace ui {
 
-RibbonWindow::RibbonWindow(Manager& manager)
-    : Window(manager, "") {
-}
+namespace {
 
-void RibbonWindow::Render() {
-  // File
-  if (ImGui::BeginMenu("File")) {
-    if (ImGui::MenuItem("Open", "Ctrl+O")) {
+ImVec2 const defWinSize(384, 512);
 
-    }
-    if (ImGui::MenuItem("Save", "Ctrl+S")) {
+} // namespace
 
-    }
-    ImGui::EndMenu();
-  }
-
-  // View
-  if (ImGui::BeginMenu("View")) {
-    if (ImGui::MenuItem("Functions", "Ctrl+N")) {
-      manager().Add(new FunctionsWindow(manager()));
-    }
-    if (ImGui::MenuItem("Strings", "Ctrl+T")) {
-      manager().Add(new StringsWindow(manager()));
-    }
-    if (ImGui::MenuItem("Disassembly", "Ctrl+D")) {
-      manager().Add(new DisasmWindow(manager()));
-    }
-    if (ImGui::MenuItem("Hexdump", "Ctrl+H")) {
-
-    }
-    if (ImGui::MenuItem("Console", "Ctrl+K")) {
-
-    }
-    ImGui::EndMenu();
-  }
-
-  // Settings
-  if (ImGui::BeginMenu("Settings")) {
-    if (ImGui::MenuItem("Fonts")) {
-
-    }
-    ImGui::EndMenu();
-  }
-
-  // Help
-  if (ImGui::BeginMenu("Help")) {
-    if (ImGui::MenuItem("About")) {
-
-    }
-    ImGui::EndMenu();
-  }
-}
-
-void RibbonWindow::Show() {
-  if (ImGui::BeginMainMenuBar()) {
-    Render();
-    ImGui::EndMainMenuBar();
-  }
+DisasmWindow::DisasmWindow(Manager &manager)
+    : Window(manager, "Disassembly", defWinSize) {
 }
 
 } // namespace ui
