@@ -34,9 +34,11 @@ Window::Window(std::string const& title)
 }
 
 void Window::Show() {
-  ImGui::Begin(title().c_str(), &open_);
-  Render();
-  ImGui::End();
+  if (open()) {
+    if (ImGui::Begin(title().c_str(), &open_))
+      Render();
+    ImGui::End();
+  }
 }
 
 } // namespace ui
