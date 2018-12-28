@@ -39,6 +39,10 @@ DisasmWindow::DisasmWindow(Manager &manager)
     : Window(manager, "Disassembly", defWinSize) {
 }
 
+void DisasmWindow::Render() {
+
+}
+
 } // namespace ui
 } // namespace client
 } // namespace machine_decompiler
