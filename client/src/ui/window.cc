@@ -20,6 +20,8 @@
  * IN THE SOFTWARE.
  */
 
+#include <stdio.h>
+
 #include <imgui.h>
 
 #include "ui/window.h"
@@ -28,8 +30,19 @@ namespace machine_decompiler {
 namespace client {
 namespace ui {
 
-Window::Window(std::string const& title)
-    : title_(title),
+namespace {
+
+std::string fmtptr(void const* ptr) {
+  char buff[64] = {0};
+  sprintf(buff, "%04X", ptr);
+  return std::string(buff);
+}
+
+} // namespace
+
+Window::Window(Manager& manager, std::string const& title)
+    : manager_(manager),
+      title_(title + "##" + fmtptr(this)),
       open_(true) {
 }
 

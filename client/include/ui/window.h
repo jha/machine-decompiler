@@ -29,17 +29,24 @@ namespace machine_decompiler {
 namespace client {
 namespace ui {
 
+class Manager;
+
 class Window {
+  Manager& manager_;
   std::string title_;
   bool open_;
 
  protected:
-  explicit Window(std::string const& title);
+  explicit Window(Manager& manager, std::string const& title);
   virtual ~Window() = default;
   virtual void Render() = 0;
 
  public:
   virtual void Show();
+
+  Manager& manager() {
+    return manager_;
+  }
 
   std::string const& title() const {
     return title_;

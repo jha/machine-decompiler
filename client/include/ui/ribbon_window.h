@@ -36,7 +36,7 @@ class RibbonWindow : public Window {
   void Render() override;
 
  public:
-  RibbonWindow();
+  RibbonWindow(Manager& manager);
 
   void Show() override;
 };

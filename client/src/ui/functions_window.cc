@@ -28,8 +28,8 @@ namespace machine_decompiler {
 namespace client {
 namespace ui {
 
-FunctionsWindow::FunctionsWindow()
-    : Window("Functions") {
+FunctionsWindow::FunctionsWindow(Manager& manager)
+    : Window(manager, "Functions") {
 }
 
 void FunctionsWindow::Render() {

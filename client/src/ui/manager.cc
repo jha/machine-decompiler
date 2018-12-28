@@ -31,8 +31,8 @@ namespace ui {
 
 Manager::Manager()
     : windows_() {
-  windows_.push_back(new RibbonWindow());
-  windows_.push_back(new FunctionsWindow());
+  windows_.push_back(new RibbonWindow(*this));
+  windows_.push_back(new FunctionsWindow(*this));
 }
 
 void Manager::Show() {

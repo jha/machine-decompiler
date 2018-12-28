@@ -28,8 +28,8 @@ namespace machine_decompiler {
 namespace client {
 namespace ui {
 
-RibbonWindow::RibbonWindow()
-    : Window("") {
+RibbonWindow::RibbonWindow(Manager& manager)
+    : Window(manager, "") {
 }
 
 void RibbonWindow::Render() {
@@ -47,12 +47,26 @@ void RibbonWindow::Render() {
     ImGui::EndMenu();
   }
 
-  // Settings
-  if (ImGui::BeginMenu("Settings")) {
-    if (ImGui::MenuItem("UI Fonts")) {
+  // View
+  if (ImGui::BeginMenu("View")) {
+    if (ImGui::MenuItem("Functions")) {
 
     }
-    if (ImGui::MenuItem("Editor Fonts")) {
+    if (ImGui::MenuItem("Strings")) {
+
+    }
+    if (ImGui::MenuItem("Disassembly")) {
+
+    }
+    if (ImGui::MenuItem("Hexdump")) {
+
+    }
+    ImGui::EndMenu();
+  }
+
+  // Settings
+  if (ImGui::BeginMenu("Settings")) {
+    if (ImGui::MenuItem("Fonts")) {
 
     }
     ImGui::EndMenu();

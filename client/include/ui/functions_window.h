@@ -36,7 +36,7 @@ class FunctionsWindow : public Window {
   void Render() override;
 
  public:
-  FunctionsWindow();
+  FunctionsWindow(Manager& manager);
 };
 
 } // namespace ui
