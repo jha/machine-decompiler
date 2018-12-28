@@ -23,21 +23,32 @@
 #ifndef MACHINE_DECOMPILER_UI_WINDOW_H_
 #define MACHINE_DECOMPILER_UI_WINDOW_H_
 
+#include <imgui.h>
+
 #include <string>
 
 namespace machine_decompiler {
 namespace client {
 namespace ui {
 
+namespace {
+
+ImVec2 const newWindowDefaultSize(128, 256);
+
+} // namespace
+
 class Manager;
 
 class Window {
   Manager& manager_;
   std::string title_;
+  ImVec2 default_size_;
   bool open_;
+  bool new_window_;
 
  protected:
-  explicit Window(Manager& manager, std::string const& title);
+  explicit Window(Manager& manager,
+      std::string const& title, ImVec2 const& defSize = newWindowDefaultSize);
   virtual void Render() = 0;
 
  public:
@@ -52,8 +63,21 @@ class Window {
     return title_;
   }
 
+  ImVec2 const& default_size() const {
+    return default_size_;
+  }
+
   bool open() const {
     return open_;
+  }
+
+ private:
+  bool new_window() {
+    if (new_window_) {
+      new_window_ = false;
+      return true;
+    }
+    return false;
   }
 };
 

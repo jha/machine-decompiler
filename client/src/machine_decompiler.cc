@@ -81,6 +81,9 @@ void MachineDecompiler::ShowWindow() {
   io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 
   ImGui::StyleColorsDark();
+  auto& style = ImGui::GetStyle();
+  style.WindowRounding = 4.f;
+  style.DisplayWindowPadding = ImVec2(0, 0);
 
   ImGui_ImplGlfw_InitForOpenGL(window, true);
   ImGui_ImplOpenGL3_Init(glsl_version);

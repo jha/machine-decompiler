@@ -41,14 +41,20 @@ std::string fmtptr(void const* ptr) {
 
 } // namespace
 
-Window::Window(Manager& manager, std::string const& title)
+Window::Window(Manager& manager,
+    std::string const& title, ImVec2 const& defSize)
     : manager_(manager),
       title_(title + "##" + fmtptr(this)),
-      open_(true) {
+      default_size_(defSize),
+      open_(true),
+      new_window_(true) {
 }
 
 void Window::Show() {
   if (open()) {
+    ImGui::SetNextWindowSizeConstraints(ImVec2(128, 64), ImVec2(10000, 10000));
+    if (new_window())
+      ImGui::SetNextWindowSize(default_size());
     if (ImGui::Begin(title().c_str(), &open_))
       Render();
     ImGui::End();
