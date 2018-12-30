@@ -30,6 +30,7 @@
 #include "ui/hexdump_window.h"
 #include "ui/console_window.h"
 #include "ui/open_file_modal.h"
+#include "ui/about_modal.h"
 
 namespace machine_decompiler {
 namespace client {
@@ -85,7 +86,7 @@ void Ribbon::Render() {
   // Help
   if (ImGui::BeginMenu("Help")) {
     if (ImGui::MenuItem("About")) {
-
+      manager().Add(new AboutModal(manager()));
     }
     ImGui::EndMenu();
   }

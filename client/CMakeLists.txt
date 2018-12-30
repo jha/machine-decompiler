@@ -20,7 +20,28 @@ set(SOURCES
     src/ui/hexdump_window.cc
     src/ui/console_window.cc
     src/ui/open_file_modal.cc
+    src/ui/about_modal.cc
     )
+
+# Get the current branch we're building
+find_package(Git)
+if (GIT_FOUND)
+  message("Found git ${GIT_EXECUTABLE}")
+endif(GIT_FOUND)
+message(${CMAKE_CURRENT_SOURCE_DIR})
+execute_process(
+    COMMAND "\"${GIT_EXECUTABLE}\" rev-parse --abbrev-ref HEAD -- | head -n1"
+    RESULT_VARIABLE RESULT
+    OUTPUT_VARIABLE MD_BRANCH
+    )
+if (RESULT EQUAL 0)
+  message("Detected branch ${MD_BRANCH}")
+else()
+  set(MD_BRANCH "UNKNOWN")
+  message("Unable to detect git branch: ${RESULT}")
+  message("Not in git repository, set branch to ${MD_BRANCH}")
+endif()
+add_definitions("-DBRANCH=\"${MD_BRANCH}\"")
 
 # Generic dear imgui sources required for bindings-independent GUIs
 
