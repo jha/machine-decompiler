@@ -23,20 +23,20 @@
 #ifndef MACHINE_DECOMPILER_UI_RIBBON_WINDOW_H_
 #define MACHINE_DECOMPILER_UI_RIBBON_WINDOW_H_
 
-#include "ui/window.h"
+#include "ui/element.h"
 
 namespace machine_decompiler {
 namespace client {
 namespace ui {
 
-class RibbonWindow : public Window {
+class RibbonWindow : public Element {
  protected:
   ~RibbonWindow() override = default;
 
   void Render() override;
 
  public:
-  RibbonWindow(Manager& manager);
+  explicit RibbonWindow(Manager& manager);
 
   void Show() override;
 };

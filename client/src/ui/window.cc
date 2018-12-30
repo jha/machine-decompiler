@@ -33,29 +33,24 @@ namespace ui {
 
 namespace {
 
-std::string fmtptr(void const* ptr) {
-  char buff[64] = {0};
-  sprintf(buff, "%04X", reinterpret_cast<uintptr_t>(ptr));
-  return std::string(buff);
-}
+ImVec2 const winMinSize(128, 64);
+ImVec2 const winMaxSize(10000, 10000);
 
 } // namespace
 
 Window::Window(Manager& manager,
     std::string const& title, ImVec2 const& defSize)
-    : manager_(manager),
-      title_(title + "##" + fmtptr(this)),
-      default_size_(defSize),
-      open_(true),
-      new_window_(true) {
+    : open_(true),
+      new_window_(true),
+      Element(manager, title, defSize) {
 }
 
 void Window::Show() {
   if (open()) {
-    ImGui::SetNextWindowSizeConstraints(ImVec2(128, 64), ImVec2(10000, 10000));
+    ImGui::SetNextWindowSizeConstraints(winMinSize, winMaxSize);
     if (new_window())
       ImGui::SetNextWindowSize(default_size());
-    if (ImGui::Begin(title().c_str(), &open_))
+    if (ImGui::Begin(id().c_str(), &open_))
       Render();
     ImGui::End();
   } else {

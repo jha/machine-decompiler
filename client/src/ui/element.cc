@@ -20,24 +20,29 @@
  * IN THE SOFTWARE.
  */
 
-#include <imgui.h>
+#include <stdio.h>
 
-#include "ui/functions_window.h"
+#include "ui/element.h"
 
 namespace machine_decompiler {
 namespace client {
 namespace ui {
 
-FunctionsWindow::FunctionsWindow(Manager& manager)
-    : Window(manager, "Functions") {
+namespace {
+
+std::string fmtptr(void const* ptr) {
+  char buff[64] = {0};
+  sprintf(buff, "%04X", reinterpret_cast<uintptr_t>(ptr));
+  return std::string(buff);
 }
 
-void FunctionsWindow::Render() {
-  ImGui::BeginChild((id() + "_fn_list").c_str());
-  for (auto i = 0u; i < 100; ++i) {
-    ImGui::Text("sub_%02X", i + 0x1000);
-  }
-  ImGui::EndChild();
+} // namespace
+
+Element::Element(Manager &manager,
+    std::string const &title, ImVec2 const &default_size)
+    : manager_(manager),
+      id_(title + "##" + fmtptr(this)),
+      default_size_(default_size) {
 }
 
 } // namespace ui

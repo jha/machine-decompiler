@@ -30,31 +30,31 @@ namespace client {
 namespace ui {
 
 Manager::Manager()
-    : windows_(),
+    : elements_(),
       add_queue_() {
-  windows_.push_back(new RibbonWindow(*this));
+  elements_.push_back(new RibbonWindow(*this));
 }
 
-void Manager::Add(Window* window) {
-  add_queue_.push_back(window);
+void Manager::Add(Element* elem) {
+  add_queue_.push_back(elem);
 }
 
-bool Manager::Remove(Window* window) {
-  auto it = std::find(windows_.begin(), windows_.end(), window);
-  if (it != windows_.end()) {
+bool Manager::Remove(Element* elem) {
+  auto it = std::find(elements_.begin(), elements_.end(), elem);
+  if (it != elements_.end()) {
     delete (*it);
-    windows_.erase(it);
+    elements_.erase(it);
     return true;
   }
   return false;
 }
 
 void Manager::Show() {
-  for (auto* it : windows_) {
+  for (auto* it : elements_) {
     it->Show();
   }
   for (auto* it : add_queue_) {
-    windows_.push_back(it);
+    elements_.push_back(it);
   }
   add_queue_.clear();
 }

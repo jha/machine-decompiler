@@ -20,26 +20,48 @@
  * IN THE SOFTWARE.
  */
 
-#include <imgui.h>
+#ifndef MACHINE_DECOMPILER_UI_ELEMENT_H_
+#define MACHINE_DECOMPILER_UI_ELEMENT_H_
 
-#include "ui/functions_window.h"
+#include <string>
+
+#include <imgui.h>
 
 namespace machine_decompiler {
 namespace client {
 namespace ui {
 
-FunctionsWindow::FunctionsWindow(Manager& manager)
-    : Window(manager, "Functions") {
-}
+class Manager;
 
-void FunctionsWindow::Render() {
-  ImGui::BeginChild((id() + "_fn_list").c_str());
-  for (auto i = 0u; i < 100; ++i) {
-    ImGui::Text("sub_%02X", i + 0x1000);
+class Element {
+  Manager& manager_;
+  std::string id_;
+  ImVec2 default_size_;
+
+ protected:
+  explicit Element(Manager& manager,
+      std::string const& title, ImVec2 const& default_size);
+
+  virtual void Render() = 0;
+
+ public:
+  virtual ~Element() = default;
+
+  virtual void Show() = 0;
+
+  Manager& manager() {
+    return manager_;
   }
-  ImGui::EndChild();
-}
+  std::string const& id() const {
+    return id_;
+  }
+  ImVec2 const& default_size() const {
+    return default_size_;
+  }
+};
 
 } // namespace ui
 } // namespace client
 } // namespace machine_decompiler
+
+#endif // MACHINE_DECOMPILER_UI_ELEMENT_H_

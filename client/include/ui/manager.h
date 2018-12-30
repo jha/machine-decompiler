@@ -25,21 +25,21 @@
 
 #include <vector>
 
-#include "ui/window.h"
+#include "ui/element.h"
 
 namespace machine_decompiler {
 namespace client {
 namespace ui {
 
 class Manager {
-  std::vector<Window*> windows_;
-  std::vector<Window*> add_queue_;
+  std::vector<Element*> elements_;
+  std::vector<Element*> add_queue_;
 
  public:
   Manager();
 
-  void Add(Window* window);
-  bool Remove(Window* window);
+  void Add(Element* elem);
+  bool Remove(Element* elem);
   void Show();
 };
 

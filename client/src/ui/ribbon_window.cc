@@ -35,7 +35,7 @@ namespace client {
 namespace ui {
 
 RibbonWindow::RibbonWindow(Manager& manager)
-    : Window(manager, "") {
+    : Element(manager, "", ImVec2(0, 0)) {
 }
 
 void RibbonWindow::Render() {

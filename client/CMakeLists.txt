@@ -8,7 +8,9 @@ set(CMAKE_CXX_STANDARD 14)
 set(SOURCES
     src/main.cc
     src/machine_decompiler.cc
+    src/data/binary.cc
     src/ui/manager.cc
+    src/ui/element.cc
     src/ui/window.cc
     src/ui/ribbon_window.cc
     src/ui/functions_window.cc
