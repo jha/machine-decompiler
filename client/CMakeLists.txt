@@ -12,7 +12,7 @@ set(SOURCES
     src/ui/manager.cc
     src/ui/element.cc
     src/ui/window.cc
-    src/ui/ribbon_window.cc
+    src/ui/ribbon.cc
     src/ui/functions_window.cc
     src/ui/strings_window.cc
     src/ui/disasm_window.cc

@@ -20,9 +20,7 @@
  * IN THE SOFTWARE.
  */
 
-#include "ui/ribbon_window.h"
-#include "ui/functions_window.h"
-
+#include "ui/ribbon.h"
 #include "ui/manager.h"
 
 namespace machine_decompiler {
@@ -32,7 +30,7 @@ namespace ui {
 Manager::Manager()
     : elements_(),
       add_queue_() {
-  elements_.push_back(new RibbonWindow(*this));
+  elements_.push_back(new Ribbon(*this));
 }
 
 void Manager::Add(Element* elem) {

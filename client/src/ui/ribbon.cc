@@ -22,7 +22,7 @@
 
 #include <imgui.h>
 
-#include "ui/ribbon_window.h"
+#include "ui/ribbon.h"
 #include "ui/manager.h"
 #include "ui/functions_window.h"
 #include "ui/strings_window.h"
@@ -34,11 +34,11 @@ namespace machine_decompiler {
 namespace client {
 namespace ui {
 
-RibbonWindow::RibbonWindow(Manager& manager)
+Ribbon::Ribbon(Manager& manager)
     : Element(manager, "", ImVec2(0, 0)) {
 }
 
-void RibbonWindow::Render() {
+void Ribbon::Render() {
   // File
   if (ImGui::BeginMenu("File")) {
     if (ImGui::MenuItem("Open", "Ctrl+O")) {
@@ -87,7 +87,7 @@ void RibbonWindow::Render() {
   }
 }
 
-void RibbonWindow::Show() {
+void Ribbon::Show() {
   if (ImGui::BeginMainMenuBar()) {
     Render();
     ImGui::EndMainMenuBar();
