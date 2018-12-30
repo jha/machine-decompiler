@@ -19,6 +19,7 @@ set(SOURCES
     src/ui/disasm_window.cc
     src/ui/hexdump_window.cc
     src/ui/console_window.cc
+    src/ui/open_file_modal.cc
     )
 
 # Generic dear imgui sources required for bindings-independent GUIs

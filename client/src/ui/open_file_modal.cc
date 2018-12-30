@@ -20,37 +20,28 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef MACHINE_DECOMPILER_UI_MODAL_H_
-#define MACHINE_DECOMPILER_UI_MODAL_H_
-
-#include <imgui.h>
-
-#include "ui/element.h"
+#include "ui/open_file_modal.h"
+#include "ui/manager.h"
 
 namespace machine_decompiler {
 namespace client {
 namespace ui {
 
-namespace {
-ImVec2 const defModalSize(0, 0);
-} // namespace
+OpenFileModal::OpenFileModal(Manager &manager)
+    : Modal(manager, "Open File") {
+}
 
-class Modal : public Element {
-  bool open_;
-
- public:
-  explicit Modal(Manager& manager,
-      std::string const& title, ImVec2 const& default_size = defModalSize);
-
-  void Show() override;
-
-  bool open() const {
-    return open_;
+void OpenFileModal::Render() {
+  char buff[1024] = {0};
+  ImGui::Text("Paste file path to load. Supports HTTP/S");
+  ImGui::PushItemWidth(-0.1f);
+  ImGui::InputText("", buff, sizeof (buff));
+  ImGui::PopItemWidth();
+  if (ImGui::Button("Load")) {
+    manager().Remove(this);
   }
-};
+}
 
 } // namespace ui
 } // namespace client
 } // namespace machine_decompiler
-
-#endif // MACHINE_DECOMPILER_UI_MODAL_H_

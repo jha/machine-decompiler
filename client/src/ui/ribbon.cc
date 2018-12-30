@@ -29,6 +29,7 @@
 #include "ui/disasm_window.h"
 #include "ui/hexdump_window.h"
 #include "ui/console_window.h"
+#include "ui/open_file_modal.h"
 
 namespace machine_decompiler {
 namespace client {
@@ -42,7 +43,7 @@ void Ribbon::Render() {
   // File
   if (ImGui::BeginMenu("File")) {
     if (ImGui::MenuItem("Open", "Ctrl+O")) {
-
+      manager().Add(new OpenFileModal(manager()));
     }
     if (ImGui::MenuItem("Save", "Ctrl+S")) {
 

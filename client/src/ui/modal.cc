@@ -21,20 +21,26 @@
  */
 
 #include "ui/modal.h"
+#include "ui/manager.h"
 
 namespace machine_decompiler {
 namespace client {
 namespace ui {
 
-Modal::Modal(Manager &manager, std::string const& title)
-    : Element(manager, title, ImVec2(0, 0)) {
+Modal::Modal(Manager &manager,
+    std::string const& title, ImVec2 const& default_size)
+    : open_(true),
+      Element(manager, title, default_size) {
 }
 
 void Modal::Show() {
   ImGui::OpenPopup(id().c_str());
-  if (ImGui::BeginPopupModal(id().c_str())) {
+  if (ImGui::BeginPopupModal(id().c_str(), &open_)) {
     Render();
+    ImGui::EndPopup();
   }
+  if (!open())
+    manager().Remove(this);
 }
 
 } // namespace ui

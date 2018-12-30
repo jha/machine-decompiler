@@ -20,37 +20,25 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef MACHINE_DECOMPILER_UI_MODAL_H_
-#define MACHINE_DECOMPILER_UI_MODAL_H_
+#ifndef MACHINE_DECOMPILER_UI_OPEN_FILE_H_
+#define MACHINE_DECOMPILER_UI_OPEN_FILE_H_
 
-#include <imgui.h>
-
-#include "ui/element.h"
+#include "ui/modal.h"
 
 namespace machine_decompiler {
 namespace client {
 namespace ui {
 
-namespace {
-ImVec2 const defModalSize(0, 0);
-} // namespace
-
-class Modal : public Element {
-  bool open_;
+class OpenFileModal : public Modal {
+ protected:
+  void Render() override;
 
  public:
-  explicit Modal(Manager& manager,
-      std::string const& title, ImVec2 const& default_size = defModalSize);
-
-  void Show() override;
-
-  bool open() const {
-    return open_;
-  }
+  explicit OpenFileModal(Manager& manager);
 };
 
 } // namespace ui
 } // namespace client
 } // namespace machine_decompiler
 
-#endif // MACHINE_DECOMPILER_UI_MODAL_H_
+#endif // MACHINE_DECOMPILER_UI_OPEN_FILE_H_
