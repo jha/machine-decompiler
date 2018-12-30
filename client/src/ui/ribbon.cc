@@ -76,6 +76,9 @@ void Ribbon::Render() {
     if (ImGui::MenuItem("Fonts")) {
 
     }
+    if (ImGui::MenuItem("Proxy")) {
+
+    }
     ImGui::EndMenu();
   }
 
