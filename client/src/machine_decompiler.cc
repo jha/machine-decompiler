@@ -43,7 +43,8 @@ ImVec4 const clearColor = ImVec4(.2f, .2f, .2f, 1.f);
 } // namespace
 
 MachineDecompiler::MachineDecompiler()
-    : ui_manager_() {
+    : ui_manager_(*this),
+      log_output_() {
 }
 
 void MachineDecompiler::ShowWindow() {
@@ -88,6 +89,8 @@ void MachineDecompiler::ShowWindow() {
   ImGui_ImplGlfw_InitForOpenGL(window, true);
   ImGui_ImplOpenGL3_Init(glsl_version);
 
+  log_output().Log("Welcome to Machine Decompiler!");
+
   while (!glfwWindowShouldClose(window)) {
     glfwPollEvents();
 
@@ -112,7 +115,7 @@ void MachineDecompiler::ShowWindow() {
 }
 
 void MachineDecompiler::LoadBinary(std::string& path) {
-
+  log_output().Log("Attempting to load %s...", path.c_str());
 }
 
 } // namespace client

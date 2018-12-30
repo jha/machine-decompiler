@@ -22,6 +22,7 @@
 
 #include "ui/open_file_modal.h"
 #include "ui/manager.h"
+#include "machine_decompiler.h"
 
 namespace machine_decompiler {
 namespace client {
@@ -38,6 +39,8 @@ void OpenFileModal::Render() {
   ImGui::InputText("", buff, sizeof (buff));
   ImGui::PopItemWidth();
   if (ImGui::Button("Load")) {
+    std::string path(buff);
+    manager().decompiler().LoadBinary(path);
     manager().Remove(this);
   }
 }

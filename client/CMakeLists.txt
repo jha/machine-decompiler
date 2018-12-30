@@ -9,6 +9,7 @@ set(SOURCES
     src/main.cc
     src/machine_decompiler.cc
     src/data/binary.cc
+    src/data/log_output.cc
     src/ui/manager.cc
     src/ui/element.cc
     src/ui/window.cc

@@ -20,39 +20,31 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef MACHINE_DECOMPILER_UI_MANAGER_H_
-#define MACHINE_DECOMPILER_UI_MANAGER_H_
+#ifndef MACHINE_DECOMPILER_DATA_LOG_OUTPUT_H_
+#define MACHINE_DECOMPILER_DATA_LOG_OUTPUT_H_
 
-#include <vector>
+#include <string>
+#include <list>
+#include <mutex>
 
-#include "ui/element.h"
+#include <stdarg.h>
 
 namespace machine_decompiler {
 namespace client {
+namespace data {
 
-class MachineDecompiler;
-
-namespace ui {
-
-class Manager {
-  MachineDecompiler& decompiler_;
-  std::vector<Element*> elements_;
-  std::vector<Element*> add_queue_;
+class LogOutput {
+  std::mutex output_mutex_;
+  std::list<std::string> output_;
 
  public:
-  explicit Manager(MachineDecompiler& decompiler);
-
-  void Add(Element* elem);
-  bool Remove(Element* elem);
-  void Show();
-
-  MachineDecompiler& decompiler() {
-    return decompiler_;
-  }
+  LogOutput();
+  void Log(char const* fmt, ...);
+  unsigned LatestHistory(std::string const* dstHistory[], unsigned maxLines);
 };
 
-} // namespace ui
+} // namespace data
 } // namespace client
 } // namespace machine_decompiler
 
-#endif // MACHINE_DECOMPILER_UI_MANAGER_H_
+#endif // MACHINE_DECOMPILER_DATA_LOG_OUTPUT_H_

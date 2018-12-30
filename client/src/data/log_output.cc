@@ -20,39 +20,48 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef MACHINE_DECOMPILER_UI_MANAGER_H_
-#define MACHINE_DECOMPILER_UI_MANAGER_H_
+#include <stdio.h>
 
-#include <vector>
-
-#include "ui/element.h"
+#include "data/log_output.h"
 
 namespace machine_decompiler {
 namespace client {
+namespace data {
 
-class MachineDecompiler;
+LogOutput::LogOutput()
+    : output_mutex_(),
+      output_() {
+}
 
-namespace ui {
+void LogOutput::Log(char const* fmt, ...) {
+  char buff[1024 * 16];
+  va_list args;
+  va_start(args, fmt);
+  vsnprintf(buff, sizeof (buff) - 1, fmt, args);
+  va_end(args);
+  std::lock_guard<std::mutex> lock(output_mutex_);
+  output_.push_front(std::string(buff));
+}
 
-class Manager {
-  MachineDecompiler& decompiler_;
-  std::vector<Element*> elements_;
-  std::vector<Element*> add_queue_;
+unsigned LogOutput::LatestHistory(
+    std::string const* dstHistory[], unsigned maxlen) {
+  if (maxlen == 0)
+    return 0;
 
- public:
-  explicit Manager(MachineDecompiler& decompiler);
+  auto start_idx = maxlen, written = 0u;
+  if (maxlen > output_.size())
+    start_idx = output_.size();
 
-  void Add(Element* elem);
-  bool Remove(Element* elem);
-  void Show();
-
-  MachineDecompiler& decompiler() {
-    return decompiler_;
+  for (auto& line : output_) {
+    dstHistory[--start_idx] = &line;
+    written++;
+    if (start_idx == 0)
+      break;
   }
-};
 
-} // namespace ui
+  return written;
+}
+
+} // namespace data
 } // namespace client
 } // namespace machine_decompiler
-
-#endif // MACHINE_DECOMPILER_UI_MANAGER_H_

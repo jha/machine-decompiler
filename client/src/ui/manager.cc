@@ -27,8 +27,9 @@ namespace machine_decompiler {
 namespace client {
 namespace ui {
 
-Manager::Manager()
-    : elements_(),
+Manager::Manager(MachineDecompiler& decompiler)
+    : decompiler_(decompiler),
+      elements_(),
       add_queue_() {
   elements_.push_back(new Ribbon(*this));
 }
