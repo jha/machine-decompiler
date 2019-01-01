@@ -26,19 +26,30 @@
 #include <string>
 #include <stdexcept>
 
+#include <string.h>
+
 namespace machine_decompiler {
 namespace client {
 namespace error {
 
 class NotImplementedException : public std::logic_error {
+  char const* msg_;
+
  public:
   explicit NotImplementedException(std::string const& member)
       :std::logic_error(member) {
+    auto local = (std::string(std::logic_error::what())
+        + " is not yet implemented");
+    msg_ = new char[local.size() + 1];
+    strcpy(const_cast<char*>(msg_), local.c_str());
+  }
+
+  ~NotImplementedException() {
+    delete msg_;
   }
 
   char const* what() const override {
-    return (std::string(std::logic_error::what())
-        + " is not yet implemented").c_str();
+    return msg_;
   }
 };
 
