@@ -26,6 +26,7 @@
 #include <string>
 
 #include "data/log_output.h"
+#include "data/binary.h"
 #include "ui/manager.h"
 
 namespace machine_decompiler {
@@ -33,6 +34,7 @@ namespace client {
 
 class MachineDecompiler {
   data::LogOutput log_output_;
+  data::Binary* binary_;
   ui::Manager ui_manager_;
 
  public:
@@ -45,6 +47,9 @@ class MachineDecompiler {
   }
   data::LogOutput& log_output() {
     return log_output_;
+  }
+  data::Binary* binary() {
+    return binary_;
   }
 };
 
