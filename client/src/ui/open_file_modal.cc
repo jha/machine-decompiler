@@ -20,6 +20,8 @@
  * IN THE SOFTWARE.
  */
 
+#include <string.h>
+
 #include "ui/open_file_modal.h"
 #include "ui/manager.h"
 #include "machine_decompiler.h"
@@ -30,16 +32,16 @@ namespace ui {
 
 OpenFileModal::OpenFileModal(Manager &manager)
     : Modal(manager, "Open File") {
+  memset(text_buff_, 0, sizeof (text_buff_));
 }
 
 void OpenFileModal::Render() {
-  char buff[1024] = {0};
   ImGui::Text("Paste file path to load. Supports HTTP/S");
   ImGui::PushItemWidth(-0.1f);
-  ImGui::InputText("", buff, sizeof (buff));
+  ImGui::InputText("", text_buff_, sizeof (text_buff_));
   ImGui::PopItemWidth();
   if (ImGui::Button("Load")) {
-    std::string path(buff);
+    std::string path(text_buff_);
     manager().decompiler().LoadBinary(path);
     manager().Remove(this);
   }

@@ -30,6 +30,8 @@ namespace client {
 namespace ui {
 
 class OpenFileModal : public Modal {
+  char text_buff_[1024];
+
  protected:
   void Render() override;
 
