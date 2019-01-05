@@ -20,30 +20,41 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef MACHINE_DECOMPILER_UI_HEXDUMP_WINDOW_H_
-#define MACHINE_DECOMPILER_UI_HEXDUMP_WINDOW_H_
+#ifndef MACHINE_DECOMPILER_DATA_HEXDUMP_CACHE_H_
+#define MACHINE_DECOMPILER_DATA_HEXDUMP_CACHE_H_
 
-#include "ui/window.h"
+#include <stdint.h>
 
 namespace machine_decompiler {
 namespace client {
-namespace ui {
+namespace data {
 
-class Manager;
+class Binary;
 
-class HexdumpWindow : public Window {
- protected:
-  void Render() override;
+class HexdumpCache {
+  Binary& binary_;
+  char const* hex_buff_;
+  uint64_t hex_buff_length_;
 
  public:
-  explicit HexdumpWindow(Manager& manager);
-  ~HexdumpWindow() override = default;
+  explicit HexdumpCache(Binary& binary);
+  ~HexdumpCache();
 
-  void Show() override;
+  void Load();
+
+  Binary& binary() {
+    return binary_;
+  }
+  char const* hex_buff() const {
+    return hex_buff_;
+  }
+  uint64_t hex_buff_length() const {
+    return hex_buff_length_;
+  }
 };
 
-} // namespace ui
+} // namespace data
 } // namespace client
 } // namespace machine_decompiler
 
-#endif // MACHINE_DECOMPILER_UI_HEXDUMP_WINDOW_H_
+#endif // MACHINE_DECOMPILER_DATA_HEXDUMP_CACHE_H_

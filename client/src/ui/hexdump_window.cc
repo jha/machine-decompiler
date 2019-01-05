@@ -24,6 +24,7 @@
 
 #include "ui/hexdump_window.h"
 #include "ui/manager.h"
+#include "machine_decompiler.h"
 
 namespace machine_decompiler {
 namespace client {
@@ -40,7 +41,21 @@ HexdumpWindow::HexdumpWindow(Manager &manager)
 }
 
 void HexdumpWindow::Render() {
+  auto& hdc = manager().decompiler().binary()->hexdump_cache();
 
+  ImVec2 size(ImGui::GetWindowContentRegionWidth(),
+      ImGui::GetWindowHeight() - 20);
+  ImGui::InputTextMultiline("", const_cast<char*>(hdc.hex_buff()),
+      hdc.hex_buff_length(), size, ImGuiInputTextFlags_ReadOnly);
+}
+
+void HexdumpWindow::Show() {
+  ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.f, 0.f));
+  auto const& winbg = ImGui::GetStyle().Colors[ImGuiCol_WindowBg];
+  ImGui::PushStyleColor(ImGuiCol_FrameBg, winbg);
+  Window::Show();
+  ImGui::PopStyleColor(1);
+  ImGui::PopStyleVar(1);
 }
 
 } // namespace ui

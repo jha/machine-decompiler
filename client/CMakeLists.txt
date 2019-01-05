@@ -10,6 +10,7 @@ set(SOURCES
     src/machine_decompiler.cc
     src/data/binary.cc
     src/data/log_output.cc
+    src/data/hexdump_cache.cc
     src/ui/manager.cc
     src/ui/element.cc
     src/ui/window.cc

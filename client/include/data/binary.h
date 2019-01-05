@@ -22,12 +22,25 @@
 
 #include <string>
 
+#ifdef _MSC_VER
+#include <Windows.h>
+#endif // _MSC_VER
+
+#include "data/hexdump_cache.h"
+
 namespace machine_decompiler {
 namespace client {
 namespace data {
 
 class Binary {
   std::string path_;
+#ifdef _MSC_VER
+  HANDLE bin_file_;
+  HANDLE bin_file_mapping_;
+#endif // _MSC_VER
+  void const* buffer_;
+  uint64_t length_;
+  HexdumpCache hexdump_cache_;
 
  public:
   explicit Binary(std::string const& path);
@@ -37,6 +50,15 @@ class Binary {
 
   std::string const& path() const {
     return path_;
+  }
+  void const* buffer() const {
+    return buffer_;
+  }
+  uint64_t length() const {
+    return length_;
+  }
+  HexdumpCache const& hexdump_cache() const {
+    return hexdump_cache_;
   }
 };
 
