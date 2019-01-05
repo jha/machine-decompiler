@@ -20,39 +20,43 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef MACHINE_DECOMPILER_UI_MANAGER_H_
-#define MACHINE_DECOMPILER_UI_MANAGER_H_
+#ifndef MACHINE_DECOMPILER_ERROR_NOT_IMPLEMENTED_H_
+#define MACHINE_DECOMPILER_ERROR_NOT_IMPLEMENTED_H_
 
-#include <vector>
+#include <string>
+#include <stdexcept>
 
-#include "ui/element.h"
+#include <string.h>
 
 namespace machine_decompiler {
 namespace client {
+namespace error {
 
-class MachineDecompiler;
-
-namespace ui {
-
-class Manager {
-  MachineDecompiler& decompiler_;
-  std::vector<Element*> elements_;
-  std::vector<Element*> add_queue_;
+class NotImplementedException : public std::logic_error {
+  char const* msg_;
 
  public:
-  explicit Manager(MachineDecompiler& decompiler);
+  explicit NotImplementedException(std::string const& member)
+      :std::logic_error(member) {
+    auto local = (std::string(std::logic_error::what())
+        + " is not yet implemented");
+    msg_ = new char[local.size() + 1];
+    strcpy(const_cast<char*>(msg_), local.c_str());
+  }
 
-  void Add(Element* elem);
-  bool Remove(Element* elem);
-  void Show();
+  ~NotImplementedException() {
+    delete msg_;
+  }
 
-  MachineDecompiler& decompiler() {
-    return decompiler_;
+  char const* what() const override {
+    return msg_;
   }
 };
 
-} // namespace ui
+} // namespace error
 } // namespace client
 } // namespace machine_decompiler
 
-#endif // MACHINE_DECOMPILER_UI_MANAGER_H_
+#define NotImplementedException() NotImplementedException(__FUNCTION__)
+
+#endif // MACHINE_DECOMPILER_ERROR_NOT_IMPLEMENTED_H_

@@ -20,34 +20,43 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef MACHINE_DECOMPILER_UI_MANAGER_H_
-#define MACHINE_DECOMPILER_UI_MANAGER_H_
+#ifndef MACHINE_DECOMPILER_UI_ELEMENT_H_
+#define MACHINE_DECOMPILER_UI_ELEMENT_H_
 
-#include <vector>
+#include <string>
 
-#include "ui/element.h"
+#include <imgui.h>
 
 namespace machine_decompiler {
 namespace client {
-
-class MachineDecompiler;
-
 namespace ui {
 
-class Manager {
-  MachineDecompiler& decompiler_;
-  std::vector<Element*> elements_;
-  std::vector<Element*> add_queue_;
+class Manager;
+
+class Element {
+  Manager& manager_;
+  std::string id_;
+  ImVec2 default_size_;
+
+ protected:
+  explicit Element(Manager& manager,
+      std::string const& title, ImVec2 const& default_size);
+
+  virtual void Render() = 0;
 
  public:
-  explicit Manager(MachineDecompiler& decompiler);
+  virtual ~Element() = default;
 
-  void Add(Element* elem);
-  bool Remove(Element* elem);
-  void Show();
+  virtual void Show() = 0;
 
-  MachineDecompiler& decompiler() {
-    return decompiler_;
+  Manager& manager() {
+    return manager_;
+  }
+  std::string const& id() const {
+    return id_;
+  }
+  ImVec2 const& default_size() const {
+    return default_size_;
   }
 };
 
@@ -55,4 +64,4 @@ class Manager {
 } // namespace client
 } // namespace machine_decompiler
 
-#endif // MACHINE_DECOMPILER_UI_MANAGER_H_
+#endif // MACHINE_DECOMPILER_UI_ELEMENT_H_

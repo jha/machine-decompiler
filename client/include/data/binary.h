@@ -20,39 +20,48 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef MACHINE_DECOMPILER_UI_MANAGER_H_
-#define MACHINE_DECOMPILER_UI_MANAGER_H_
+#include <string>
 
-#include <vector>
+#ifdef _MSC_VER
+#include <Windows.h>
+#endif // _MSC_VER
 
-#include "ui/element.h"
+#include "data/hexdump_cache.h"
 
 namespace machine_decompiler {
 namespace client {
+namespace data {
 
-class MachineDecompiler;
-
-namespace ui {
-
-class Manager {
-  MachineDecompiler& decompiler_;
-  std::vector<Element*> elements_;
-  std::vector<Element*> add_queue_;
+class Binary {
+  std::string path_;
+#ifdef _MSC_VER
+  HANDLE bin_file_;
+  HANDLE bin_file_mapping_;
+#endif // _MSC_VER
+  void const* buffer_;
+  uint64_t length_;
+  HexdumpCache hexdump_cache_;
 
  public:
-  explicit Manager(MachineDecompiler& decompiler);
+  explicit Binary(std::string const& path);
+  ~Binary();
 
-  void Add(Element* elem);
-  bool Remove(Element* elem);
-  void Show();
+  void Load() noexcept(false);
 
-  MachineDecompiler& decompiler() {
-    return decompiler_;
+  std::string const& path() const {
+    return path_;
+  }
+  void const* buffer() const {
+    return buffer_;
+  }
+  uint64_t length() const {
+    return length_;
+  }
+  HexdumpCache const& hexdump_cache() const {
+    return hexdump_cache_;
   }
 };
 
-} // namespace ui
+} // namespace data
 } // namespace client
 } // namespace machine_decompiler
-
-#endif // MACHINE_DECOMPILER_UI_MANAGER_H_

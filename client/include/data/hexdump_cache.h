@@ -20,39 +20,41 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef MACHINE_DECOMPILER_UI_MANAGER_H_
-#define MACHINE_DECOMPILER_UI_MANAGER_H_
+#ifndef MACHINE_DECOMPILER_DATA_HEXDUMP_CACHE_H_
+#define MACHINE_DECOMPILER_DATA_HEXDUMP_CACHE_H_
 
-#include <vector>
-
-#include "ui/element.h"
+#include <stdint.h>
 
 namespace machine_decompiler {
 namespace client {
+namespace data {
 
-class MachineDecompiler;
+class Binary;
 
-namespace ui {
-
-class Manager {
-  MachineDecompiler& decompiler_;
-  std::vector<Element*> elements_;
-  std::vector<Element*> add_queue_;
+class HexdumpCache {
+  Binary& binary_;
+  char const* hex_buff_;
+  uint64_t hex_buff_length_;
 
  public:
-  explicit Manager(MachineDecompiler& decompiler);
+  explicit HexdumpCache(Binary& binary);
+  ~HexdumpCache();
 
-  void Add(Element* elem);
-  bool Remove(Element* elem);
-  void Show();
+  void Load();
 
-  MachineDecompiler& decompiler() {
-    return decompiler_;
+  Binary& binary() {
+    return binary_;
+  }
+  char const* hex_buff() const {
+    return hex_buff_;
+  }
+  uint64_t hex_buff_length() const {
+    return hex_buff_length_;
   }
 };
 
-} // namespace ui
+} // namespace data
 } // namespace client
 } // namespace machine_decompiler
 
-#endif // MACHINE_DECOMPILER_UI_MANAGER_H_
+#endif // MACHINE_DECOMPILER_DATA_HEXDUMP_CACHE_H_

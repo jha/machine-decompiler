@@ -20,39 +20,31 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef MACHINE_DECOMPILER_UI_MANAGER_H_
-#define MACHINE_DECOMPILER_UI_MANAGER_H_
-
-#include <vector>
+#include <stdio.h>
 
 #include "ui/element.h"
 
 namespace machine_decompiler {
 namespace client {
-
-class MachineDecompiler;
-
 namespace ui {
 
-class Manager {
-  MachineDecompiler& decompiler_;
-  std::vector<Element*> elements_;
-  std::vector<Element*> add_queue_;
+namespace {
 
- public:
-  explicit Manager(MachineDecompiler& decompiler);
+std::string fmtptr(void const* ptr) {
+  char buff[64] = {0};
+  sprintf(buff, "%04X", reinterpret_cast<uintptr_t>(ptr));
+  return std::string(buff);
+}
 
-  void Add(Element* elem);
-  bool Remove(Element* elem);
-  void Show();
+} // namespace
 
-  MachineDecompiler& decompiler() {
-    return decompiler_;
-  }
-};
+Element::Element(Manager &manager,
+    std::string const &title, ImVec2 const &default_size)
+    : manager_(manager),
+      id_(title + "##" + fmtptr(this)),
+      default_size_(default_size) {
+}
 
 } // namespace ui
 } // namespace client
 } // namespace machine_decompiler
-
-#endif // MACHINE_DECOMPILER_UI_MANAGER_H_

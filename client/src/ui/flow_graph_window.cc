@@ -20,39 +20,28 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef MACHINE_DECOMPILER_UI_MANAGER_H_
-#define MACHINE_DECOMPILER_UI_MANAGER_H_
+#include <imgui.h>
 
-#include <vector>
-
-#include "ui/element.h"
+#include "ui/flow_graph_window.h"
 
 namespace machine_decompiler {
 namespace client {
-
-class MachineDecompiler;
-
 namespace ui {
 
-class Manager {
-  MachineDecompiler& decompiler_;
-  std::vector<Element*> elements_;
-  std::vector<Element*> add_queue_;
+namespace {
+ImVec2 const defWinSize(384, 384);
+} // namespace
 
- public:
-  explicit Manager(MachineDecompiler& decompiler);
+FlowGraphWindow::FlowGraphWindow(Manager& manager)
+    : Window(manager, "Flow Graph", defWinSize) {
+}
 
-  void Add(Element* elem);
-  bool Remove(Element* elem);
-  void Show();
-
-  MachineDecompiler& decompiler() {
-    return decompiler_;
-  }
-};
+void FlowGraphWindow::Render() {
+  ImGui::BeginChild((id() + "_flow_graph").c_str());
+  ImGui::Text("flow graph window");
+  ImGui::EndChild();
+}
 
 } // namespace ui
 } // namespace client
 } // namespace machine_decompiler
-
-#endif // MACHINE_DECOMPILER_UI_MANAGER_H_

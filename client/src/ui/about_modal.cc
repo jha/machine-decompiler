@@ -20,39 +20,36 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef MACHINE_DECOMPILER_UI_MANAGER_H_
-#define MACHINE_DECOMPILER_UI_MANAGER_H_
-
-#include <vector>
-
-#include "ui/element.h"
+#include "ui/about_modal.h"
+#include "ui/manager.h"
 
 namespace machine_decompiler {
 namespace client {
-
-class MachineDecompiler;
-
 namespace ui {
 
-class Manager {
-  MachineDecompiler& decompiler_;
-  std::vector<Element*> elements_;
-  std::vector<Element*> add_queue_;
-
- public:
-  explicit Manager(MachineDecompiler& decompiler);
-
-  void Add(Element* elem);
-  bool Remove(Element* elem);
-  void Show();
-
-  MachineDecompiler& decompiler() {
-    return decompiler_;
-  }
+namespace {
+char const* aboutMessages[] = {
+    "Machine Decompiler",
+    "MD " BRANCH,
+    "",
+    "Copyright (C) 2018 - 2019",
+    "github.com/jha",
+    "",
+    "Your feedback and contributions are appreciated!",
+    "Please visit github.com/jha/machine-decompiler",
 };
+} // namespace
+
+AboutModal::AboutModal(Manager& manager)
+    : Modal(manager, "About Machine Decompiler") {
+}
+
+void AboutModal::Render() {
+  for (auto const& line : aboutMessages) {
+    ImGui::Text(line);
+  }
+}
 
 } // namespace ui
 } // namespace client
 } // namespace machine_decompiler
-
-#endif // MACHINE_DECOMPILER_UI_MANAGER_H_

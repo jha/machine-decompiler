@@ -38,6 +38,8 @@ class HexdumpWindow : public Window {
  public:
   explicit HexdumpWindow(Manager& manager);
   ~HexdumpWindow() override = default;
+
+  void Show() override;
 };
 
 } // namespace ui

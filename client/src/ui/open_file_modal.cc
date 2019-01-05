@@ -20,39 +20,33 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef MACHINE_DECOMPILER_UI_MANAGER_H_
-#define MACHINE_DECOMPILER_UI_MANAGER_H_
+#include <string.h>
 
-#include <vector>
-
-#include "ui/element.h"
+#include "ui/open_file_modal.h"
+#include "ui/manager.h"
+#include "machine_decompiler.h"
 
 namespace machine_decompiler {
 namespace client {
-
-class MachineDecompiler;
-
 namespace ui {
 
-class Manager {
-  MachineDecompiler& decompiler_;
-  std::vector<Element*> elements_;
-  std::vector<Element*> add_queue_;
+OpenFileModal::OpenFileModal(Manager &manager)
+    : Modal(manager, "Open File") {
+  memset(text_buff_, 0, sizeof (text_buff_));
+}
 
- public:
-  explicit Manager(MachineDecompiler& decompiler);
-
-  void Add(Element* elem);
-  bool Remove(Element* elem);
-  void Show();
-
-  MachineDecompiler& decompiler() {
-    return decompiler_;
+void OpenFileModal::Render() {
+  ImGui::Text("Paste file path to load. Supports HTTP/S");
+  ImGui::PushItemWidth(-0.1f);
+  ImGui::InputText("", text_buff_, sizeof (text_buff_));
+  ImGui::PopItemWidth();
+  if (ImGui::Button("Load")) {
+    std::string path(text_buff_);
+    manager().decompiler().LoadBinary(path);
+    manager().Remove(this);
   }
-};
+}
 
 } // namespace ui
 } // namespace client
 } // namespace machine_decompiler
-
-#endif // MACHINE_DECOMPILER_UI_MANAGER_H_

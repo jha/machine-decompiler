@@ -20,34 +20,32 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef MACHINE_DECOMPILER_UI_MANAGER_H_
-#define MACHINE_DECOMPILER_UI_MANAGER_H_
+#ifndef MACHINE_DECOMPILER_UI_MODAL_H_
+#define MACHINE_DECOMPILER_UI_MODAL_H_
 
-#include <vector>
+#include <imgui.h>
 
 #include "ui/element.h"
 
 namespace machine_decompiler {
 namespace client {
-
-class MachineDecompiler;
-
 namespace ui {
 
-class Manager {
-  MachineDecompiler& decompiler_;
-  std::vector<Element*> elements_;
-  std::vector<Element*> add_queue_;
+namespace {
+ImVec2 const defModalSize(0, 0);
+} // namespace
+
+class Modal : public Element {
+  bool open_;
 
  public:
-  explicit Manager(MachineDecompiler& decompiler);
+  explicit Modal(Manager& manager,
+      std::string const& title, ImVec2 const& default_size = defModalSize);
 
-  void Add(Element* elem);
-  bool Remove(Element* elem);
-  void Show();
+  void Show() override;
 
-  MachineDecompiler& decompiler() {
-    return decompiler_;
+  bool open() const {
+    return open_;
   }
 };
 
@@ -55,4 +53,4 @@ class Manager {
 } // namespace client
 } // namespace machine_decompiler
 
-#endif // MACHINE_DECOMPILER_UI_MANAGER_H_
+#endif // MACHINE_DECOMPILER_UI_MODAL_H_

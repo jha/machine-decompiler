@@ -33,7 +33,7 @@ FunctionsWindow::FunctionsWindow(Manager& manager)
 }
 
 void FunctionsWindow::Render() {
-  ImGui::BeginChild((title() + "_fn_list").c_str());
+  ImGui::BeginChild((id() + "_fn_list").c_str());
   for (auto i = 0u; i < 100; ++i) {
     ImGui::Text("sub_%02X", i + 0x1000);
   }

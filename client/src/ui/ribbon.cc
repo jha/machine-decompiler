@@ -22,27 +22,29 @@
 
 #include <imgui.h>
 
-#include "ui/ribbon_window.h"
+#include "ui/ribbon.h"
 #include "ui/manager.h"
 #include "ui/functions_window.h"
 #include "ui/strings_window.h"
 #include "ui/disasm_window.h"
 #include "ui/hexdump_window.h"
 #include "ui/console_window.h"
+#include "ui/open_file_modal.h"
+#include "ui/about_modal.h"
 
 namespace machine_decompiler {
 namespace client {
 namespace ui {
 
-RibbonWindow::RibbonWindow(Manager& manager)
-    : Window(manager, "") {
+Ribbon::Ribbon(Manager& manager)
+    : Element(manager, "", ImVec2(0, 0)) {
 }
 
-void RibbonWindow::Render() {
+void Ribbon::Render() {
   // File
   if (ImGui::BeginMenu("File")) {
     if (ImGui::MenuItem("Open", "Ctrl+O")) {
-
+      manager().Add(new OpenFileModal(manager()));
     }
     if (ImGui::MenuItem("Save", "Ctrl+S")) {
 
@@ -75,19 +77,22 @@ void RibbonWindow::Render() {
     if (ImGui::MenuItem("Fonts")) {
 
     }
+    if (ImGui::MenuItem("Proxy")) {
+
+    }
     ImGui::EndMenu();
   }
 
   // Help
   if (ImGui::BeginMenu("Help")) {
     if (ImGui::MenuItem("About")) {
-
+      manager().Add(new AboutModal(manager()));
     }
     ImGui::EndMenu();
   }
 }
 
-void RibbonWindow::Show() {
+void Ribbon::Show() {
   if (ImGui::BeginMainMenuBar()) {
     Render();
     ImGui::EndMainMenuBar();

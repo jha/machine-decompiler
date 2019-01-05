@@ -20,23 +20,23 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef MACHINE_DECOMPILER_UI_RIBBON_WINDOW_H_
-#define MACHINE_DECOMPILER_UI_RIBBON_WINDOW_H_
+#ifndef MACHINE_DECOMPILER_UI_RIBBON_H_
+#define MACHINE_DECOMPILER_UI_RIBBON_H_
 
-#include "ui/window.h"
+#include "ui/element.h"
 
 namespace machine_decompiler {
 namespace client {
 namespace ui {
 
-class RibbonWindow : public Window {
+class Ribbon : public Element {
  protected:
-  ~RibbonWindow() override = default;
+  ~Ribbon() override = default;
 
   void Render() override;
 
  public:
-  RibbonWindow(Manager& manager);
+  explicit Ribbon(Manager& manager);
 
   void Show() override;
 };
@@ -45,4 +45,4 @@ class RibbonWindow : public Window {
 } // namespace client
 } // namespace machine_decompiler
 
-#endif // MACHINE_DECOMPILER_UI_RIBBON_WINDOW_H_
+#endif // MACHINE_DECOMPILER_UI_RIBBON_H_

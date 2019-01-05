@@ -38,6 +38,8 @@ class ConsoleWindow : public Window {
  public:
   explicit ConsoleWindow(Manager& manager);
   ~ConsoleWindow() override = default;
+
+  void Show() override;
 };
 
 } // namespace ui

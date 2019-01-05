@@ -20,39 +20,27 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef MACHINE_DECOMPILER_UI_MANAGER_H_
-#define MACHINE_DECOMPILER_UI_MANAGER_H_
+#ifndef MACHINE_DECOMPILER_UI_OPEN_FILE_H_
+#define MACHINE_DECOMPILER_UI_OPEN_FILE_H_
 
-#include <vector>
-
-#include "ui/element.h"
+#include "ui/modal.h"
 
 namespace machine_decompiler {
 namespace client {
-
-class MachineDecompiler;
-
 namespace ui {
 
-class Manager {
-  MachineDecompiler& decompiler_;
-  std::vector<Element*> elements_;
-  std::vector<Element*> add_queue_;
+class OpenFileModal : public Modal {
+  char text_buff_[1024];
+
+ protected:
+  void Render() override;
 
  public:
-  explicit Manager(MachineDecompiler& decompiler);
-
-  void Add(Element* elem);
-  bool Remove(Element* elem);
-  void Show();
-
-  MachineDecompiler& decompiler() {
-    return decompiler_;
-  }
+  explicit OpenFileModal(Manager& manager);
 };
 
 } // namespace ui
 } // namespace client
 } // namespace machine_decompiler
 
-#endif // MACHINE_DECOMPILER_UI_MANAGER_H_
+#endif // MACHINE_DECOMPILER_UI_OPEN_FILE_H_
