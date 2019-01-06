@@ -7,12 +7,7 @@ os:
 
 sudo: false
 
-addons:
-  packages:
-    cmake
-
 script:
-  - mkdir -p build
-  - cd build
-  - cmake -DCMAKE_BUILD_TYPE=Release ../
+  - mkdir build && cd build
+  - cmake ..
   - cmake --build .
