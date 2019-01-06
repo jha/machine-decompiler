@@ -9,7 +9,7 @@ decompiler together to produce an always-updating product.
 ```bash
 mkdir -p build
 cd build
-cmake -DCMAKE_BUILD_TYPE=Release ../
+cmake -DCMAKE_GENERATOR_TYPE=x64 -DCMAKE_BUILD_TYPE=Release ../
 cmake --build .
 ```
 
