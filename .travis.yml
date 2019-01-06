@@ -1,0 +1,16 @@
+os:
+  - linux
+  - osx
+  - windows
+
+sudo: false
+
+addons:
+  packages:
+    cmake
+
+script:
+  - mkdir -p build
+  - cd build
+  - cmake -DCMAKE_BUILD_TYPE=Release ../
+  - cmake --build .
