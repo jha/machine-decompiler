@@ -73,11 +73,8 @@ find_library(GLFW3_LIB
     PATH_SUFFIXES lib
     NO_DEFAULT_PATH
     )
-find_library(OPENGL_LIB
-    NAMES Opengl32
-    PATH_SUFFIXES lib
-    )
-target_link_libraries(imgui-bindings ${OPENGL_LIB} ${GLFW3_LIB})
+find_package(OpenGL)
+target_link_libraries(imgui-bindings ${OPENGL_LIBRARIES} ${GLFW3_LIB})
 
 add_executable(md-client ${SOURCES})
 target_link_libraries(md-client
