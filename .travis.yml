@@ -9,5 +9,10 @@ sudo: false
 
 script:
   - mkdir build && cd build
-  - cmake -DCMAKE_GENERATOR_PLATFORM=x64 ..
+  - |
+    if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
+      cmake -DCMAKE_GENERATOR_PLATFORM=x64 ..
+    else
+      cmake ..
+    fi
   - cmake --build .
